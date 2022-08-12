@@ -61,10 +61,15 @@ class SlackPostMessageAPI {
           'form_params' => $params,
           'allow_redirects' => false,
         ] );
-      $ret = $res->getBody()->getContents();
-      return true;
-    } catch (ClientException $e) {
-      return false;
+      $json = $res->getBody()->getContents();
+      $ret = json_decode($json,JSON_OBJECT_AS_ARRAY);
+      if ($ret['ok'] === false){
+        throw new \RuntimeException($json);
+      }
+      return json_decode($json);
+      
+    } catch (\Exception $e) {
+      throw  $e;
     }
   }
   
