@@ -104,33 +104,4 @@ class SlackPostMessageAPI {
   public function setMessage ( SlackMessage $message ) {
     $this->message = $message;
   }
-  
-  public function latestMessage ( $ch ) {
-    $ret = $this->readChannel( $ch, 1, 0 );
-    return $ret[0];
-  }
-  
-  public function readChannel ( $channel_id, $limit = 10, $latest = '0' ): array {
-    try {
-      $cli = new Client();
-      $res = $cli->request( "POST",
-        $this->endpoint.'/conversations.history',
-        [
-          'form_params' => [
-            'token' => $this->token,
-            'channel' => $channel_id,
-            'limit' => $limit,
-            'latest' => $latest,
-          ],
-          'allow_redirects' => false] );
-      $content = $res->getBody()->getContents();
-      $response = json_decode( $content );
-      if ( !$response->ok ) {
-        throw new \Exception( $content );
-      }
-      return $response->messages;
-    } catch (ClientException $e) {
-      return [];
-    }
-  }
 }
