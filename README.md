@@ -5,7 +5,8 @@ slack post by bot account as laravel plugin
 ## Installing
 
 ```sh
-composer config repositories.'php-laravel-slack-post' vcs https://github.com/takuya/php-laravel-slack-post  
+composer config repositories.'php-laravel-slack-post' \
+         vcs https://github.com/takuya/php-laravel-slack-post  
 composer require takuya/php-laravel-slack-post:master
 composer install 
 ```
