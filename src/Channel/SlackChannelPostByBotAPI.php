@@ -19,7 +19,10 @@ class SlackChannelPostByBotAPI implements CustomChannelContract {
       throw new \RuntimeException('toSlack not found in $notifiable');
     }
     //
-    $cli = new SlackPostMessageAPI(config( 'slack.token' ));
+    $token = null;
+    $token = $token ?: config( 'slack.token' );
+    $token = $token ?: env('SLACK_TOKEN');
+    $cli = new SlackPostMessageAPI($token);
     /** @var SlackMessage $message */
     $message = $notification->{$formatter}( $notifiable );
     $cli->setMessage( $message );
