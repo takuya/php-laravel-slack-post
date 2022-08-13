@@ -80,8 +80,8 @@ SLACK_CHANNEL_ID=C01AXXXXX
 
 return [
   'token'=>env('SLACK_TOKEN'),
-  'channel_id'=>env('SLACK_CHANNEL_NAME'),
-  'channel_name'=>env('SLACK_CHANNEL_ID'),
+  'channel_id'=>env('SLACK_CHANNEL_ID'),
+  'channel_name'=>env('SLACK_CHANNEL_NAME'),
 ];
 ```
 ### run
